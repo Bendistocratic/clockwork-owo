@@ -15,6 +15,26 @@ public class UIManager : MonoBehaviour {
 		
 	}
 
+    public void AddTaskPrefab()
+    {
+
+    }
+
+    public void AddTaskDescription(string inTaskDescription)
+    {
+
+    }
+
+    public void AddTaskNumber(string inTaskNumber)
+    {
+
+    }
+
+    public void AddTaskTime(string inTaskTime)
+    {
+
+    }
+
     public void EnterGameScene()
     {
         SceneManager.LoadScene("GameScreen");
