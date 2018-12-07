@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour {
     public Color32 darkenedColour;
     #endregion
 
+    public UnityEngine.UI.Image ImgA, ImgS, ImgD, ImgF, ImgJ, ImgK, ImgL, ImgSemi;
+    public Color32 buttonNoPressed, buttonPressed;
+
     private Dictionary<KeyCode, List<System.Guid>> listOfTaskAtCurrentTime;
     private int currentLives;
     private bool isPaused;
@@ -60,21 +63,29 @@ public class GameController : MonoBehaviour {
         if (isPaused)
             return;
 
-        if (Input.GetKeyDown(KeyCode.A)) { onKeyPressed(KeyCode.A); }
+        if (Input.GetKeyDown(KeyCode.A)) { onKeyPressed(KeyCode.A); ImgA.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.A)) { ImgA.color = buttonNoPressed; }
 
-        if (Input.GetKeyDown(KeyCode.S)) { onKeyPressed(KeyCode.S); }
+        if (Input.GetKeyDown(KeyCode.S)) { onKeyPressed(KeyCode.S); ImgS.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.S)) { ImgS.color = buttonNoPressed; }
+        
+        if (Input.GetKeyDown(KeyCode.D)) { onKeyPressed(KeyCode.D); ImgD.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.D)) { ImgD.color = buttonNoPressed; }
 
-        if (Input.GetKeyDown(KeyCode.D)) { onKeyPressed(KeyCode.D); }
+        if (Input.GetKeyDown(KeyCode.F)) { onKeyPressed(KeyCode.F); ImgF.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.F)) { ImgF.color = buttonNoPressed; }
 
-        if (Input.GetKeyDown(KeyCode.F)) { onKeyPressed(KeyCode.F); }
+        if (Input.GetKeyDown(KeyCode.J)) { onKeyPressed(KeyCode.J); ImgJ.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.J)) { ImgJ.color = buttonNoPressed; }
 
-        if (Input.GetKeyDown(KeyCode.J)) { onKeyPressed(KeyCode.J); }
+        if (Input.GetKeyDown(KeyCode.K)) { onKeyPressed(KeyCode.K); ImgK.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.K)) { ImgK.color = buttonNoPressed; }
 
-        if (Input.GetKeyDown(KeyCode.K)) { onKeyPressed(KeyCode.K); }
+        if (Input.GetKeyDown(KeyCode.L)) { onKeyPressed(KeyCode.L); ImgL.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.L)) { ImgL.color = buttonNoPressed; }
 
-        if (Input.GetKeyDown(KeyCode.L)) { onKeyPressed(KeyCode.L); }
-
-        if (Input.GetKeyDown(KeyCode.Semicolon)) { onKeyPressed(KeyCode.Semicolon); }
+        if (Input.GetKeyDown(KeyCode.Semicolon)) { onKeyPressed(KeyCode.Semicolon); ImgSemi.color = buttonPressed; }
+        if (Input.GetKeyUp(KeyCode.Semicolon)) { ImgSemi.color = buttonNoPressed; }
 
         if (Input.GetKeyDown(KeyCode.Space)) { isPaused = !isPaused; }
     }

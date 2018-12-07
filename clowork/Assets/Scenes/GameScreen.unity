@@ -931,6 +931,20 @@ MonoBehaviour:
   darkenedColour:
     serializedVersion: 2
     rgba: 2132943394
+  ImgA: {fileID: 1374478950}
+  ImgS: {fileID: 1845640079}
+  ImgD: {fileID: 868134618}
+  ImgF: {fileID: 1631524759}
+  ImgJ: {fileID: 355098737}
+  ImgK: {fileID: 1284916628}
+  ImgL: {fileID: 1437744280}
+  ImgSemi: {fileID: 983658786}
+  buttonNoPressed:
+    serializedVersion: 2
+    rgba: 4294967295
+  buttonPressed:
+    serializedVersion: 2
+    rgba: 4285624689
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
