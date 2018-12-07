@@ -25,6 +25,7 @@ public class TaskController : MonoBehaviour {
     private static TaskController _instance;
     public static TaskController Instance { get { return _instance; } }
 
+    public bool debugMode;
     public Level[] Levels;
     public string[] TaskDescription;
 
@@ -74,9 +75,14 @@ public class TaskController : MonoBehaviour {
                 Task temp = generateTask(Levels[currentLevel].NumberOfButtons);
                 tm.AddTimedEvent(() =>
                 {
+                    Debug.Log("Fired" + temp.Code);
                     GameController.Instance.AddTasks(temp.Code, temp.TaskId);
+                    Debug.Log("Fired timed event");
                 }, temp.Hour, temp.Minute);
                 UIManager.Instance.AddUiTask(temp);
+
+                if (debugMode)
+                    hasGameStarted = false;
             }
             else
             {
@@ -88,6 +94,7 @@ public class TaskController : MonoBehaviour {
     private void Reset()
     {
         currentLevel = numberOfTasksCleared = 0;
+        currentTime = Levels[currentLevel].NewTaskCountdown;
     }
 
     public void AddNumberOfTasksCleared()
@@ -111,6 +118,12 @@ public class TaskController : MonoBehaviour {
             if (task.Hour >= TIME_UNIT)
                 task.Hour = 0;
             task.Minute = tm.GetCurrentMinute();
+        }
+
+        if (debugMode)
+        {
+            task.Hour = 0;
+            task.Minute = 3;
         }
 
         task.TaskId = System.Guid.NewGuid();

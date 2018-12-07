@@ -27,15 +27,18 @@ public class GameController : MonoBehaviour {
 
     public void AddTasks(KeyCode keyCode, System.Guid eventIndicator) // change buttonToPress int to enum
     {
+        //Debug.Log(listOfTaskAtCurrentTime.ContainsKey(keyCode));
         if (listOfTaskAtCurrentTime.ContainsKey(keyCode))
         {
             listOfTaskAtCurrentTime[keyCode].Add(eventIndicator);
         }
         else
         {
+            //Debug.Log("Keycode no exist");
             List<System.Guid> tempList = new List<System.Guid>();
             tempList.Add(eventIndicator);
             listOfTaskAtCurrentTime.Add(keyCode, tempList);
+            //Debug.Log(listOfTaskAtCurrentTime.Count);
         }
     }
 
@@ -45,7 +48,7 @@ public class GameController : MonoBehaviour {
         {
             minusHealth();
         }
-        listOfTaskAtCurrentTime = new Dictionary<KeyCode, List<System.Guid>>();
+        //listOfTaskAtCurrentTime = new Dictionary<KeyCode, List<System.Guid>>();
     }
 
     private void Update()
@@ -74,19 +77,26 @@ public class GameController : MonoBehaviour {
 
     private void onKeyPressed(KeyCode code)
     {
+        //Debug.Log("Entered via " + code.ToString());
         if (listOfTaskAtCurrentTime.ContainsKey(code))
         {
+            //Debug.Log("In If statement");
             List<System.Guid> temp = listOfTaskAtCurrentTime[code];
             listOfTaskAtCurrentTime.Remove(code);
             for (int i = 0; i < temp.Count; i++)
             {
+                //Debug.Log("Key Pressed Id" + temp[i]);
                 UIManager.Instance.RemoveUiTask(temp[i]);
                 TaskController.Instance.AddNumberOfTasksCleared();
             }
         }
         else
         {
-            Debug.Log("Entered");
+            /*
+            foreach (KeyValuePair<KeyCode, List<System.Guid>> x in listOfTaskAtCurrentTime)
+            {
+                Debug.Log(x.Key);
+            } */
             minusHealth();
         }
     }
@@ -100,6 +110,7 @@ public class GameController : MonoBehaviour {
             UIManager.Instance.GameOver();
             TaskController.Instance.StopGame();
             TimeManager.Instance.StopGame();
+            isPaused = true;
         }
     }
 

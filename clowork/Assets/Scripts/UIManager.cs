@@ -13,11 +13,7 @@ public class UIManager : MonoBehaviour {
     public GameObject TaskPrefab;
     public GameObject GameOverScreen;
 
-    public Dictionary<System.Guid, GameObject> PrefabList = new Dictionary<System.Guid, GameObject>();
-
-    private TextMeshProUGUI taskText;
-    private TextMeshProUGUI timeText;
-    private TextMeshProUGUI buttonText;
+    public Dictionary<System.Guid, GameObject> PrefabList;
     private int numberOfTask;
 
     private void Awake()
@@ -30,12 +26,7 @@ public class UIManager : MonoBehaviour {
 
     private void Start()
     {
-        if (TaskPrefab != null)
-        {
-            taskText = TaskPrefab.transform.Find("TaskText").GetComponent<TextMeshProUGUI>();
-            timeText = TaskPrefab.transform.Find("TimerText").GetComponent<TextMeshProUGUI>();
-            buttonText = TaskPrefab.transform.Find("GameButton").transform.Find("Text").GetComponent<TextMeshProUGUI>();
-        }
+        PrefabList = new Dictionary<System.Guid, GameObject>();
     }
 
     public void AddUiTask(Task task)
@@ -43,36 +34,9 @@ public class UIManager : MonoBehaviour {
         if (numberOfTask >= 8)
             return;
 
-        AddTaskPrefab(task.TaskId);
-        AddTaskDescription(task.TaskDescription);
-        AddTaskTime(task.Hour + ":" + (task.Minute * 5));
-        switch(task.Code)
-        {
-            case KeyCode.A:
-                AddButtonText("A");
-                break;
-            case KeyCode.S:
-                AddButtonText("S");
-                break;
-            case KeyCode.D:
-                AddButtonText("D");
-                break;
-            case KeyCode.F:
-                AddButtonText("F");
-                break;
-            case KeyCode.J:
-                AddButtonText("J");
-                break;
-            case KeyCode.K:
-                AddButtonText("K");
-                break;
-            case KeyCode.L:
-                AddButtonText("L");
-                break;
-            case KeyCode.Semicolon:
-                AddButtonText(";");
-                break;
-        }
+        TaskAttributes taskAttr = Instantiate(TaskPrefab, List.transform).GetComponent<TaskAttributes>();
+        PrefabList.Add(task.TaskId, taskAttr.gameObject);
+        taskAttr.AddTaskAttributes(task);
         numberOfTask++;
     }
 
@@ -83,32 +47,10 @@ public class UIManager : MonoBehaviour {
             GameObject temp = PrefabList[id];
             Destroy(temp);
             PrefabList.Remove(id);
-            Debug.Log("Destroyed");
             numberOfTask--;
         }
         else
             Debug.LogWarning("Unidentified Guid");
-    }
-
-    private void AddTaskPrefab(System.Guid inGuid)
-    {
-        GameObject taskPrefab = Instantiate(TaskPrefab, List.transform);
-        PrefabList.Add(inGuid, taskPrefab);
-    }
-
-    private void AddTaskDescription(string inTaskDescription)
-    {
-        taskText.text = inTaskDescription;
-    }
-
-    private void AddTaskTime(string inTaskTime)
-    {
-        timeText.text = inTaskTime;
-    }
-
-    private void AddButtonText(string inButtonText)
-    {
-        buttonText.text = inButtonText;
     }
 
     private void ReloadGameScene()
