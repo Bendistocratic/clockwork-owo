@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour {
     public AudioClip HoverButtonSound;
     public GameObject List;
     public GameObject TaskPrefab;
+    public GameObject GameOverScreen;
 
     public Dictionary<System.Guid, GameObject> PrefabList = new Dictionary<System.Guid, GameObject>();
 
@@ -119,6 +120,11 @@ public class UIManager : MonoBehaviour {
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void GameOver()
+    {
+        GameOverScreen.SetActive(true);
     }
 
     public void PlayHoverSound(Button inButton)
