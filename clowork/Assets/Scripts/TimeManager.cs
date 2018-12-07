@@ -13,6 +13,8 @@ public class TimeManager : MonoBehaviour {
     private int currentHour, currentMinute;
     private bool hasGameStarted, isPaused;
     private float currentTime, intervalBetweenEachMinute;
+
+    public AudioSource tickSound;
     #endregion
 
     public ClockController ClockController;
@@ -53,6 +55,7 @@ public class TimeManager : MonoBehaviour {
                 GameController.Instance.CheckForEventsLeft();
                 ClockController.SetHourHand(currentHour);
                 ClockController.SetMinuteHand(currentMinute);
+                tickSound.Play();
                 fireTimedEvents();
             }
             else

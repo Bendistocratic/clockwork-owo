@@ -7,13 +7,24 @@ public class GameController : MonoBehaviour {
     public static GameController Instance { get { return _instance; } }
 
     #region LIVES
+    [Header("Lives")]
     public int GameLives;
     public UnityEngine.UI.Image[] livesImages;
     public Color32 darkenedColour;
+    public AudioSource wrongSound;
     #endregion
 
-    public UnityEngine.UI.Image ImgA, ImgS, ImgD, ImgF, ImgJ, ImgK, ImgL, ImgSemi;
+    #region BUTTON
+    [Header("Button")]
+    public UnityEngine.UI.Image ImgA;
+    public UnityEngine.UI.Image ImgS, ImgD, ImgF, ImgJ, ImgK, ImgL, ImgSemi;
     public Color32 buttonNoPressed, buttonPressed;
+    public AudioSource buttonSound;
+    #endregion
+
+    [Header("Reminder Sounds")]
+    public AudioSource reminderSound;
+    public AudioClip sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8;
 
     private Dictionary<KeyCode, List<System.Guid>> listOfTaskAtCurrentTime;
     private int currentLives;
@@ -54,6 +65,13 @@ public class GameController : MonoBehaviour {
         if (listOfTaskAtCurrentTime.Count > 0)
         {
             minusHealth();
+            foreach (KeyValuePair<KeyCode, List<System.Guid>> x in listOfTaskAtCurrentTime)
+            {
+                for (int i = 0; i < x.Value.Count; i++)
+                {
+                    UIManager.Instance.RemoveUiTask(x.Value[i]);
+                }
+            }
         }
         listOfTaskAtCurrentTime = new Dictionary<KeyCode, List<System.Guid>>();
     }
@@ -93,6 +111,7 @@ public class GameController : MonoBehaviour {
     private void onKeyPressed(KeyCode code)
     {
         //Debug.Log("Entered via " + code.ToString());
+        buttonSound.Play();
         if (listOfTaskAtCurrentTime.ContainsKey(code))
         {
             //Debug.Log("In If statement");
@@ -103,6 +122,34 @@ public class GameController : MonoBehaviour {
                 //Debug.Log("Key Pressed Id" + temp[i]);
                 UIManager.Instance.RemoveUiTask(temp[i]);
                 TaskController.Instance.AddNumberOfTasksCleared();
+            }
+            
+            switch(code)
+            {
+                case KeyCode.A:
+                    reminderSound.PlayOneShot(sound1);
+                    break;
+                case KeyCode.S:
+                    reminderSound.PlayOneShot(sound2);
+                    break;
+                case KeyCode.D:
+                    reminderSound.PlayOneShot(sound3);
+                    break;
+                case KeyCode.F:
+                    reminderSound.PlayOneShot(sound4);
+                    break;
+                case KeyCode.J:
+                    reminderSound.PlayOneShot(sound5);
+                    break;
+                case KeyCode.K:
+                    reminderSound.PlayOneShot(sound6);
+                    break;
+                case KeyCode.L:
+                    reminderSound.PlayOneShot(sound7);
+                    break;
+                case KeyCode.Semicolon:
+                    reminderSound.PlayOneShot(sound8);
+                    break;
             }
         }
         else
@@ -120,6 +167,7 @@ public class GameController : MonoBehaviour {
     {
         currentLives--;
         livesImages[currentLives].color = darkenedColour;
+        wrongSound.Play();
         if (currentLives < 1)
         {
             UIManager.Instance.GameOver();
