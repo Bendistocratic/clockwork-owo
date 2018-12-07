@@ -26,8 +26,6 @@ public class TimeManager : MonoBehaviour {
         else
             _instance = this;
 
-        DontDestroyOnLoad(this);
-
         initTimeManager();
     }
 
