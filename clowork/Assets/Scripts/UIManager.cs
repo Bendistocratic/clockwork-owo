@@ -7,20 +7,20 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public AudioClip HoverButtonSound;
+    public GameObject List;
+    public GameObject TaskPrefab;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            AddTaskPrefab();
+        }
+    }
 
     public void AddTaskPrefab()
     {
-
+        GameObject taskPrefab = Instantiate(TaskPrefab, List.transform);
     }
 
     public void AddTaskDescription(string inTaskDescription)

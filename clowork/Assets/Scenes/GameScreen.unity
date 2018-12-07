@@ -261,7 +261,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 20
+  m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -760,6 +760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverButtonSound: {fileID: 8300000, guid: 85899f584f2878a4c88e134352647653, type: 3}
+  List: {fileID: 327068746}
+  TaskPrefab: {fileID: 1553766030009920, guid: 6c5f0be9d727cb74ab62e89d0b96c460, type: 2}
 --- !u!4 &508074676
 Transform:
   m_ObjectHideFlags: 0
@@ -883,7 +885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.172}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -108.149994, y: 50.240005}
+  m_AnchoredPosition: {x: -108.150024, y: 50.23999}
   m_SizeDelta: {x: -216.3, y: -100.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528375618
