@@ -44,14 +44,14 @@ public class TaskController : MonoBehaviour {
             _instance = this;
 
         keyCodeList = new List<KeyCode>(8);
-        keyCodeList[0] = KeyCode.A;
-        keyCodeList[1] = KeyCode.S;
-        keyCodeList[2] = KeyCode.D;
-        keyCodeList[3] = KeyCode.F;
-        keyCodeList[4] = KeyCode.J;
-        keyCodeList[5] = KeyCode.K;
-        keyCodeList[6] = KeyCode.L;
-        keyCodeList[7] = KeyCode.Semicolon;
+        keyCodeList.Add(KeyCode.A);
+        keyCodeList.Add(KeyCode.S);
+        keyCodeList.Add(KeyCode.D);
+        keyCodeList.Add(KeyCode.F);
+        keyCodeList.Add(KeyCode.J);
+        keyCodeList.Add(KeyCode.K);
+        keyCodeList.Add(KeyCode.L);
+        keyCodeList.Add(KeyCode.Semicolon);
         keyCodeList.Shuffle();
     }
 
@@ -60,6 +60,7 @@ public class TaskController : MonoBehaviour {
         Reset();
         tm = TimeManager.Instance;
         tm.SetNewTimeIntervalBetweenMinutes(Levels[currentLevel].IntervalBetweenEachMinute);
+        hasGameStarted = true;
     }
 
     private void Update()
@@ -107,6 +108,8 @@ public class TaskController : MonoBehaviour {
         if (task.Hour == tm.GetCurrentHour())
         {
             task.Hour++;
+            if (task.Hour >= TIME_UNIT)
+                task.Hour = 0;
             task.Minute = tm.GetCurrentMinute();
         }
 
@@ -119,5 +122,10 @@ public class TaskController : MonoBehaviour {
     private KeyCode getRandomKeyCode(int numberOfButtons)
     {
         return keyCodeList[Random.Range(0, numberOfButtons)];
+    }
+
+    public void StopGame()
+    {
+        hasGameStarted = false;
     }
 }

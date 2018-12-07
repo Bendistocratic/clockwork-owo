@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour {
     private TextMeshProUGUI taskText;
     private TextMeshProUGUI timeText;
     private TextMeshProUGUI buttonText;
+    private int numberOfTask;
 
     private void Awake()
     {
@@ -39,6 +40,9 @@ public class UIManager : MonoBehaviour {
 
     public void AddUiTask(Task task)
     {
+        if (numberOfTask >= 8)
+            return;
+
         AddTaskPrefab(task.TaskId);
         AddTaskDescription(task.TaskDescription);
         AddTaskTime(task.Hour + ":" + (task.Minute * 5));
@@ -69,6 +73,7 @@ public class UIManager : MonoBehaviour {
                 AddButtonText(";");
                 break;
         }
+        numberOfTask++;
     }
 
     public void RemoveUiTask(System.Guid id)
@@ -78,6 +83,8 @@ public class UIManager : MonoBehaviour {
             GameObject temp = PrefabList[id];
             Destroy(temp);
             PrefabList.Remove(id);
+            Debug.Log("Destroyed");
+            numberOfTask--;
         }
         else
             Debug.LogWarning("Unidentified Guid");

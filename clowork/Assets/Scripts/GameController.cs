@@ -86,6 +86,7 @@ public class GameController : MonoBehaviour {
         }
         else
         {
+            Debug.Log("Entered");
             minusHealth();
         }
     }
@@ -96,7 +97,9 @@ public class GameController : MonoBehaviour {
         // Update UI
         if (currentLives < 1)
         {
-            Debug.Log("You Lose");
+            UIManager.Instance.GameOver();
+            TaskController.Instance.StopGame();
+            TimeManager.Instance.StopGame();
         }
     }
 

@@ -28,6 +28,11 @@ public class TimeManager : MonoBehaviour {
         initTimeManager();
     }
 
+    private void Start()
+    {
+        hasGameStarted = true;
+    }
+
     private void Update()
     {
         if (hasGameStarted && !isPaused)
@@ -117,5 +122,10 @@ public class TimeManager : MonoBehaviour {
     public void SetNewTimeIntervalBetweenMinutes(float interval)
     {
         intervalBetweenEachMinute = interval;
+    }
+
+    public void StopGame()
+    {
+        hasGameStarted = false;
     }
 }
