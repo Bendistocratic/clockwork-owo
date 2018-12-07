@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverButtonSound: {fileID: 0}
+  List: {fileID: 0}
+  TaskPrefab: {fileID: 0}
 --- !u!4 &226170370
 Transform:
   m_ObjectHideFlags: 0
