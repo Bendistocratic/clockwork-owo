@@ -6,16 +6,29 @@ using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour {
+    private static UIManager _instance;
+    public static UIManager Instance { get { return _instance; } }
 
     public AudioClip HoverButtonSound;
     public GameObject List;
     public GameObject TaskPrefab;
+    public GameObject GameOverScreen;
 
     public Dictionary<System.Guid, GameObject> PrefabList = new Dictionary<System.Guid, GameObject>();
 
     private TextMeshProUGUI taskText;
     private TextMeshProUGUI timeText;
     private TextMeshProUGUI buttonText;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+            Destroy(this.gameObject);
+        else
+            _instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     private void Start()
     {
@@ -27,45 +40,74 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    public void Update()
+    public void AddUiTask(Task task)
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "GameScreen")
+        AddTaskPrefab(task.TaskId);
+        AddTaskDescription(task.TaskDescription);
+        AddTaskTime(task.Hour + ":" + (task.Minute * 5));
+        switch(task.Code)
         {
-            if (Time.timeScale == 1)
-            {
-                Time.timeScale = 0;
-                Debug.Log("Pause Game");
-            }
-            else
-            {
-                Time.timeScale = 1;
-                Debug.Log("Unpause Game");
-            }
+            case KeyCode.A:
+                AddButtonText("A");
+                break;
+            case KeyCode.S:
+                AddButtonText("S");
+                break;
+            case KeyCode.D:
+                AddButtonText("D");
+                break;
+            case KeyCode.F:
+                AddButtonText("F");
+                break;
+            case KeyCode.J:
+                AddButtonText("J");
+                break;
+            case KeyCode.K:
+                AddButtonText("K");
+                break;
+            case KeyCode.L:
+                AddButtonText("L");
+                break;
+            case KeyCode.Semicolon:
+                AddButtonText(";");
+                break;
         }
     }
 
-    public void AddTaskPrefab(System.Guid inGuid)
+    public void RemoveUiTask(System.Guid id)
+    {
+        if (PrefabList.ContainsKey(id))
+        {
+            GameObject temp = PrefabList[id];
+            Destroy(temp);
+            PrefabList.Remove(id);
+        }
+        else
+            Debug.LogWarning("Unidentified Guid");
+    }
+
+    private void AddTaskPrefab(System.Guid inGuid)
     {
         GameObject taskPrefab = Instantiate(TaskPrefab, List.transform);
         PrefabList.Add(inGuid, taskPrefab);
     }
 
-    public void AddTaskDescription(string inTaskDescription)
+    private void AddTaskDescription(string inTaskDescription)
     {
         taskText.text = inTaskDescription;
     }
 
-    public void AddTaskTime(string inTaskTime)
+    private void AddTaskTime(string inTaskTime)
     {
         timeText.text = inTaskTime;
     }
 
-    public void AddButtonText(string inButtonText)
+    private void AddButtonText(string inButtonText)
     {
         buttonText.text = inButtonText;
     }
 
-    public void ReloadGameScene()
+    private void ReloadGameScene()
     {
         EnterGameScene();
     }
@@ -78,6 +120,11 @@ public class UIManager : MonoBehaviour {
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void GameOver()
+    {
+        GameOverScreen.SetActive(true);
     }
 
     public void PlayHoverSound(Button inButton)
