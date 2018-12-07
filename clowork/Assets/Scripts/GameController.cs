@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour {
         Reset();
     }
 
-    public void AddEvents(KeyCode keyCode, System.Guid eventIndicator) // change buttonToPress int to enum
+    public void AddTasks(KeyCode keyCode, System.Guid eventIndicator) // change buttonToPress int to enum
     {
         if (listOfTaskAtCurrentTime.ContainsKey(keyCode))
         {
@@ -72,8 +72,12 @@ public class GameController : MonoBehaviour {
         {
             List<System.Guid> temp = listOfTaskAtCurrentTime[code];
             listOfTaskAtCurrentTime.Remove(code);
-            // Remove from list in scene
-            Debug.LogWarning("Remove from list in scene not done.");
+            for (int i = 0; i < temp.Count; i++)
+            {
+                // Remove from UiManager
+                TaskController.Instance.AddNumberOfTasksCleared();
+            }
+            Debug.LogWarning("Remove from list in scene incomplete.");
         }
         else
         {
