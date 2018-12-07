@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
+    public AudioClip HoverButtonSound;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -33,6 +35,11 @@ public class UIManager : MonoBehaviour {
     public void AddTaskTime(string inTaskTime)
     {
 
+    }
+
+    public void ReloadGameScene()
+    {
+        EnterGameScene();
     }
 
     public void EnterGameScene()
