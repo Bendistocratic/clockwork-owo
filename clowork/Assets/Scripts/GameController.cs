@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 
     private Dictionary<KeyCode, List<System.Guid>> listOfTaskAtCurrentTime;
     private int currentLives;
+    private bool isPaused;
 
     private void Awake()
     {
@@ -49,6 +50,9 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
+        if (isPaused)
+            return;
+
         if (Input.GetKeyDown(KeyCode.A)) { onKeyPressed(KeyCode.A); }
 
         if (Input.GetKeyDown(KeyCode.S)) { onKeyPressed(KeyCode.S); }
@@ -64,6 +68,8 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.L)) { onKeyPressed(KeyCode.L); }
 
         if (Input.GetKeyDown(KeyCode.Semicolon)) { onKeyPressed(KeyCode.Semicolon); }
+
+        if (Input.GetKeyDown(KeyCode.Space)) { isPaused = !isPaused; }
     }
 
     private void onKeyPressed(KeyCode code)
@@ -98,5 +104,6 @@ public class GameController : MonoBehaviour {
     {
         listOfTaskAtCurrentTime = new Dictionary<KeyCode, List<System.Guid>>();
         currentLives = GameLives;
+        isPaused = false;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -26,8 +25,6 @@ public class UIManager : MonoBehaviour {
             Destroy(this.gameObject);
         else
             _instance = this;
-
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -109,12 +106,7 @@ public class UIManager : MonoBehaviour {
 
     private void ReloadGameScene()
     {
-        EnterGameScene();
-    }
-
-    public void EnterGameScene()
-    {
-        SceneManager.LoadScene("GameScreen");
+        GameManager.Instance.EnterGameScene();
     }
 
     public void ExitGame()
