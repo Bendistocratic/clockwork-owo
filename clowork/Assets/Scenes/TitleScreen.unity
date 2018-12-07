@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 226170370}
   - component: {fileID: 226170369}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: MenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,13 +137,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 226170368}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd833e11685b4e479c3a0ee47277eb5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1337558223e38124db98c51a4fba5a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoverButtonSound: {fileID: 0}
-  List: {fileID: 0}
-  TaskPrefab: {fileID: 0}
-  GameOverScreen: {fileID: 0}
+  instructionsCanvas: {fileID: 0}
+  instructionsRaycaster: {fileID: 0}
 --- !u!4 &226170370
 Transform:
   m_ObjectHideFlags: 0
@@ -151,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 226170368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6183646, y: -0.031010225, z: -0.08074216}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -677,7 +675,24 @@ MonoBehaviour:
   m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 226170369}
+          m_MethodName: PlayHoverSound
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1049948079}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
 --- !u!1 &1192857692
 GameObject:
@@ -1164,6 +1179,46 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!1 &1425122891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1425122892}
+  - component: {fileID: 1425122893}
+  m_Layer: 0
+  m_Name: PersistentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1425122892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1425122891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1425122893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1425122891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06bf098bf33914e4a842cbe19e798711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1448778566
 GameObject:
   m_ObjectHideFlags: 0

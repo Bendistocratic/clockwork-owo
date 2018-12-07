@@ -241,7 +241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000020981, y: 0.000030518}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 216.3, y: 449.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &327068748
@@ -743,8 +743,11 @@ GameObject:
   m_Component:
   - component: {fileID: 508074676}
   - component: {fileID: 508074675}
+  - component: {fileID: 508074677}
+  - component: {fileID: 508074679}
+  - component: {fileID: 508074678}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,12 +775,82 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 508074674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4235771, y: 1.8071324, z: 0.29680583}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &508074677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508074674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b028a1eaddcd42b4bb0798f61475a78f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clockController: {fileID: 0}
+  GameController: {fileID: 508074679}
+--- !u!114 &508074678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508074674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee71b06c661ab4d418fa4aa1c432daa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Levels:
+  - NumberOfButtons: 2
+    NewTaskCountdown: 3
+    NumberOfTaskClearedToNext: 3
+    IntervalBetweenEachMinute: 3
+  - NumberOfButtons: 3
+    NewTaskCountdown: 2.5
+    NumberOfTaskClearedToNext: 6
+    IntervalBetweenEachMinute: 3
+  - NumberOfButtons: 3
+    NewTaskCountdown: 2
+    NumberOfTaskClearedToNext: 9
+    IntervalBetweenEachMinute: 2.5
+  - NumberOfButtons: 4
+    NewTaskCountdown: 2
+    NumberOfTaskClearedToNext: 12
+    IntervalBetweenEachMinute: 2.5
+  - NumberOfButtons: 5
+    NewTaskCountdown: 1.5
+    NumberOfTaskClearedToNext: 15
+    IntervalBetweenEachMinute: 2
+  - NumberOfButtons: 6
+    NewTaskCountdown: 1
+    NumberOfTaskClearedToNext: 21
+    IntervalBetweenEachMinute: 2
+  - NumberOfButtons: 7
+    NewTaskCountdown: 1
+    NumberOfTaskClearedToNext: 24
+    IntervalBetweenEachMinute: 1.5
+  - NumberOfButtons: 8
+    NewTaskCountdown: 0.5
+    NumberOfTaskClearedToNext: 2147483647
+    IntervalBetweenEachMinute: 1
+  TaskDescription: []
+--- !u!114 &508074679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 508074674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92563d5ffad800046b1feea6ac112484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameLives: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,13 +2250,13 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 954708639}
-  m_LocalRotation: {x: 0, y: -0, z: 0.35020748, w: -0.93667215}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0001163, y: 1.0001163, z: 1.0001163}
   m_Children: []
   m_Father: {fileID: 1608100526}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 319}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -3.6, y: -18.754}
@@ -3102,6 +3175,7 @@ GameObject:
   - component: {fileID: 1608100526}
   - component: {fileID: 1608100528}
   - component: {fileID: 1608100527}
+  - component: {fileID: 1608100529}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -3163,6 +3237,32 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1608100525}
   m_CullTransparentMesh: 0
+--- !u!114 &1608100529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1608100525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c55c2ef524b8948ac7e58bfe37fae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinuteHand: {fileID: 954708640}
+  HourHand: {fileID: 1742924632}
+  rotations:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 30}
+  - {x: 0, y: 0, z: 60}
+  - {x: 0, y: 0, z: 90}
+  - {x: 0, y: 0, z: 120}
+  - {x: 0, y: 0, z: 150}
+  - {x: 0, y: 0, z: 180}
+  - {x: 0, y: 0, z: 210}
+  - {x: 0, y: 0, z: 240}
+  - {x: 0, y: 0, z: 270}
+  - {x: 0, y: 0, z: 300}
+  - {x: 0, y: 0, z: 330}
 --- !u!1 &1611638668
 GameObject:
   m_ObjectHideFlags: 0

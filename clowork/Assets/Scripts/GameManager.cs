@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
             Destroy(this.gameObject);
         else
             _instance = this;
+
+        DontDestroyOnLoad(this);
     }
 
     public void LoadScene(string sceneName)

@@ -9,14 +9,13 @@ public class TimeManager : MonoBehaviour {
     #region TIME
     private const int TIME_UNIT = 12;
 
-    public float IntervalBetweenEachMinute;
-
     private List<System.Action>[][] timeBucketList; // [hour][minute] - minute in intervals of 5
     private int currentHour, currentMinute;
     private bool hasGameStarted, isPaused;
-    private float currentTime;
+    private float currentTime, intervalBetweenEachMinute;
     #endregion
 
+    public ClockController ClockController;
     public GameController GameController;
 
     private void Awake()
@@ -33,7 +32,7 @@ public class TimeManager : MonoBehaviour {
     {
         if (hasGameStarted && !isPaused)
         {
-            if (currentTime > IntervalBetweenEachMinute)
+            if (currentTime > intervalBetweenEachMinute)
             {
                 currentTime = 0;
                 currentMinute++;
@@ -47,6 +46,8 @@ public class TimeManager : MonoBehaviour {
                     }
                 }
                 GameController.Instance.CheckForEventsLeft();
+                ClockController.SetHourHand(currentHour);
+                ClockController.SetMinuteHand(currentMinute);
                 fireTimedEvents();
             }
             else
@@ -101,5 +102,20 @@ public class TimeManager : MonoBehaviour {
     public void PauseGame(bool isPaused)
     {
         this.isPaused = isPaused;
+    }
+
+    public int GetCurrentMinute()
+    {
+        return currentMinute;
+    }
+
+    public int GetCurrentHour()
+    {
+        return currentHour;
+    }
+
+    public void SetNewTimeIntervalBetweenMinutes(float interval)
+    {
+        intervalBetweenEachMinute = interval;
     }
 }

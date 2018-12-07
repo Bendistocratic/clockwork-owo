@@ -8,7 +8,8 @@ public struct Level
     [Range(0, 8)]
     public int NumberOfButtons;
     public float NewTaskCountdown;
-    public int NumberOfTaskCleared;
+    public int NumberOfTaskClearedToNext;
+    public float IntervalBetweenEachMinute;
 }
 
 public struct Task
@@ -33,6 +34,7 @@ public class TaskController : MonoBehaviour {
     private bool hasGameStarted;
     private float currentTime;
     private List<KeyCode> keyCodeList;
+    private TimeManager tm;
 
     private void Awake()
     {
@@ -56,6 +58,8 @@ public class TaskController : MonoBehaviour {
     private void Start()
     {
         Reset();
+        tm = TimeManager.Instance;
+        tm.SetNewTimeIntervalBetweenMinutes(Levels[currentLevel].IntervalBetweenEachMinute);
     }
 
     private void Update()
@@ -65,8 +69,9 @@ public class TaskController : MonoBehaviour {
             if (currentTime < 0)
             {
                 currentTime = Levels[currentLevel].NewTaskCountdown;
+                tm.SetNewTimeIntervalBetweenMinutes(Levels[currentLevel].IntervalBetweenEachMinute);
                 Task temp = generateTask(Levels[currentLevel].NumberOfButtons);
-                TimeManager.Instance.AddTimedEvent(() =>
+                tm.AddTimedEvent(() =>
                 {
                     GameController.Instance.AddTasks(temp.Code, temp.TaskId);
                 }, temp.Hour, temp.Minute);
@@ -87,7 +92,7 @@ public class TaskController : MonoBehaviour {
     public void AddNumberOfTasksCleared()
     {
         numberOfTasksCleared++;
-        if (numberOfTasksCleared >= Levels[currentLevel].NumberOfTaskCleared)
+        if (numberOfTasksCleared >= Levels[currentLevel].NumberOfTaskClearedToNext)
         {
             if (currentLevel + 1 < Levels.Length) // else max level reached
                 currentLevel++;
@@ -99,6 +104,12 @@ public class TaskController : MonoBehaviour {
         Task task;
         task.Hour = Random.Range(0, TIME_UNIT);
         task.Minute = Random.Range(0, TIME_UNIT);
+        if (task.Hour == tm.GetCurrentHour())
+        {
+            task.Hour++;
+            task.Minute = tm.GetCurrentMinute();
+        }
+
         task.TaskId = System.Guid.NewGuid();
         task.Code = getRandomKeyCode(numberOfButtons);
         task.TaskDescription = TaskDescription[Random.Range(0, TaskDescription.Length)];

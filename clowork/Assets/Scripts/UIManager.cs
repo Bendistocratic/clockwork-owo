@@ -106,7 +106,7 @@ public class UIManager : MonoBehaviour {
 
     private void ReloadGameScene()
     {
-        GameManager.Instance.EnterGameScene();
+        GameManager.Instance.LoadScene("GameScreen");
     }
 
     public void ExitGame()
