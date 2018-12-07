@@ -27,6 +27,23 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name == "GameScreen")
+        {
+            if (Time.timeScale == 1)
+            {
+                Time.timeScale = 0;
+                Debug.Log("Pause Game");
+            }
+            else
+            {
+                Time.timeScale = 1;
+                Debug.Log("Unpause Game");
+            }
+        }
+    }
+
     public void AddTaskPrefab(System.Guid inGuid)
     {
         GameObject taskPrefab = Instantiate(TaskPrefab, List.transform);
