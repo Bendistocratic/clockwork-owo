@@ -74,10 +74,9 @@ public class GameController : MonoBehaviour {
             listOfTaskAtCurrentTime.Remove(code);
             for (int i = 0; i < temp.Count; i++)
             {
-                // Remove from UiManager
+                UIManager.Instance.RemoveUiTask(temp[i]);
                 TaskController.Instance.AddNumberOfTasksCleared();
             }
-            Debug.LogWarning("Remove from list in scene incomplete.");
         }
         else
         {

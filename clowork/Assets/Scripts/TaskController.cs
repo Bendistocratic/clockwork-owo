@@ -17,6 +17,7 @@ public struct Task
     public int Minute;
     public System.Guid TaskId;
     public KeyCode Code;
+    public string TaskDescription;
 }
 
 public class TaskController : MonoBehaviour {
@@ -24,6 +25,7 @@ public class TaskController : MonoBehaviour {
     public static TaskController Instance { get { return _instance; } }
 
     public Level[] Levels;
+    public string[] TaskDescription;
 
     private const int TIME_UNIT = 12;
 
@@ -68,7 +70,7 @@ public class TaskController : MonoBehaviour {
                 {
                     GameController.Instance.AddTasks(temp.Code, temp.TaskId);
                 }, temp.Hour, temp.Minute);
-                // Add to Ui
+                UIManager.Instance.AddUiTask(temp);
             }
             else
             {
@@ -99,6 +101,7 @@ public class TaskController : MonoBehaviour {
         task.Minute = Random.Range(0, TIME_UNIT);
         task.TaskId = System.Guid.NewGuid();
         task.Code = getRandomKeyCode(numberOfButtons);
+        task.TaskDescription = TaskDescription[Random.Range(0, TaskDescription.Length)];
         return task;
     }
 

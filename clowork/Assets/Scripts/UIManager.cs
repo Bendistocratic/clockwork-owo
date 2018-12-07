@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour {
+    private static UIManager _instance;
+    public static UIManager Instance { get { return _instance; } }
 
     public AudioClip HoverButtonSound;
     public GameObject List;
@@ -17,6 +19,14 @@ public class UIManager : MonoBehaviour {
     private TextMeshProUGUI timeText;
     private TextMeshProUGUI buttonText;
 
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+            Destroy(this.gameObject);
+        else
+            _instance = this;
+    }
+
     private void Start()
     {
         if (TaskPrefab != null)
@@ -27,28 +37,74 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    public void AddTaskPrefab(System.Guid inGuid)
+    public void AddUiTask(Task task)
+    {
+        AddTaskPrefab(task.TaskId);
+        AddTaskDescription(task.TaskDescription);
+        AddTaskTime(task.Hour + ":" + (task.Minute * 5));
+        switch(task.Code)
+        {
+            case KeyCode.A:
+                AddButtonText("A");
+                break;
+            case KeyCode.S:
+                AddButtonText("S");
+                break;
+            case KeyCode.D:
+                AddButtonText("D");
+                break;
+            case KeyCode.F:
+                AddButtonText("F");
+                break;
+            case KeyCode.J:
+                AddButtonText("J");
+                break;
+            case KeyCode.K:
+                AddButtonText("K");
+                break;
+            case KeyCode.L:
+                AddButtonText("L");
+                break;
+            case KeyCode.Semicolon:
+                AddButtonText(";");
+                break;
+        }
+    }
+
+    public void RemoveUiTask(System.Guid id)
+    {
+        if (PrefabList.ContainsKey(id))
+        {
+            GameObject temp = PrefabList[id];
+            Destroy(temp);
+            PrefabList.Remove(id);
+        }
+        else
+            Debug.LogWarning("Unidentified Guid");
+    }
+
+    private void AddTaskPrefab(System.Guid inGuid)
     {
         GameObject taskPrefab = Instantiate(TaskPrefab, List.transform);
         PrefabList.Add(inGuid, taskPrefab);
     }
 
-    public void AddTaskDescription(string inTaskDescription)
+    private void AddTaskDescription(string inTaskDescription)
     {
         taskText.text = inTaskDescription;
     }
 
-    public void AddTaskTime(string inTaskTime)
+    private void AddTaskTime(string inTaskTime)
     {
         timeText.text = inTaskTime;
     }
 
-    public void AddButtonText(string inButtonText)
+    private void AddButtonText(string inButtonText)
     {
         buttonText.text = inButtonText;
     }
 
-    public void ReloadGameScene()
+    private void ReloadGameScene()
     {
         EnterGameScene();
     }
