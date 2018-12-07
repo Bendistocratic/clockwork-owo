@@ -6,7 +6,11 @@ public class GameController : MonoBehaviour {
     private static GameController _instance;
     public static GameController Instance { get { return _instance; } }
 
+    #region LIVES
     public int GameLives;
+    public UnityEngine.UI.Image[] livesImages;
+    public Color32 darkenedColour;
+    #endregion
 
     private Dictionary<KeyCode, List<System.Guid>> listOfTaskAtCurrentTime;
     private int currentLives;
@@ -48,7 +52,7 @@ public class GameController : MonoBehaviour {
         {
             minusHealth();
         }
-        //listOfTaskAtCurrentTime = new Dictionary<KeyCode, List<System.Guid>>();
+        listOfTaskAtCurrentTime = new Dictionary<KeyCode, List<System.Guid>>();
     }
 
     private void Update()
@@ -104,7 +108,7 @@ public class GameController : MonoBehaviour {
     private void minusHealth()
     {
         currentLives--;
-        // Update UI
+        livesImages[currentLives].color = darkenedColour;
         if (currentLives < 1)
         {
             UIManager.Instance.GameOver();

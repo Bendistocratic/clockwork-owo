@@ -8,7 +8,7 @@ public class TaskAttributes : MonoBehaviour {
     public void AddTaskAttributes(Task task)
     {
         AddTaskDescription(task.TaskDescription);
-        AddTaskTime(task.Hour + ":" + (task.Minute * 5));
+        AddTaskTime(task.Hour.ToString("00") + ":" + (task.Minute * 5).ToString("00"));
 
         switch (task.Code)
         {

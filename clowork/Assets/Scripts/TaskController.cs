@@ -75,9 +75,9 @@ public class TaskController : MonoBehaviour {
                 Task temp = generateTask(Levels[currentLevel].NumberOfButtons);
                 tm.AddTimedEvent(() =>
                 {
-                    Debug.Log("Fired" + temp.Code);
+                    //Debug.Log("Fired" + temp.Code);
                     GameController.Instance.AddTasks(temp.Code, temp.TaskId);
-                    Debug.Log("Fired timed event");
+                    //Debug.Log("Fired timed event");
                 }, temp.Hour, temp.Minute);
                 UIManager.Instance.AddUiTask(temp);
 
@@ -110,15 +110,14 @@ public class TaskController : MonoBehaviour {
     private Task generateTask(int numberOfButtons)
     {
         Task task;
-        task.Hour = Random.Range(0, TIME_UNIT);
-        task.Minute = Random.Range(0, TIME_UNIT);
-        if (task.Hour == tm.GetCurrentHour())
+        task.Hour = Random.Range(tm.GetCurrentHour(), tm.GetCurrentHour() + 3);
+        task.Minute = Random.Range(tm.GetCurrentMinute() + 3, tm.GetCurrentMinute() + 5);
+        if (task.Minute >= TIME_UNIT)
         {
+            task.Minute %= TIME_UNIT;
             task.Hour++;
-            if (task.Hour >= TIME_UNIT)
-                task.Hour = 0;
-            task.Minute = tm.GetCurrentMinute();
         }
+        task.Hour %= TIME_UNIT;
 
         if (debugMode)
         {
