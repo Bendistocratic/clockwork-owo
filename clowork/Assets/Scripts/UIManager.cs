@@ -27,17 +27,10 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            AddTaskPrefab();
-        }
-    }
-
-    public void AddTaskPrefab()
+    public void AddTaskPrefab(System.Guid inGuid)
     {
         GameObject taskPrefab = Instantiate(TaskPrefab, List.transform);
+        PrefabList.Add(inGuid, taskPrefab);
     }
 
     public void AddTaskDescription(string inTaskDescription)
