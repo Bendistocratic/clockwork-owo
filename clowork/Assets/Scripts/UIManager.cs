@@ -3,12 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour {
 
     public AudioClip HoverButtonSound;
     public GameObject List;
     public GameObject TaskPrefab;
+
+    public Dictionary<System.Guid, GameObject> PrefabList = new Dictionary<System.Guid, GameObject>();
+
+    private TextMeshProUGUI taskText;
+    private TextMeshProUGUI timeText;
+    private TextMeshProUGUI buttonText;
+
+    private void Start()
+    {
+        if (TaskPrefab != null)
+        {
+            taskText = TaskPrefab.transform.Find("TaskText").GetComponent<TextMeshProUGUI>();
+            timeText = TaskPrefab.transform.Find("TimerText").GetComponent<TextMeshProUGUI>();
+            buttonText = TaskPrefab.transform.Find("GameButton").transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        }
+    }
 
     void Update()
     {
@@ -25,17 +42,17 @@ public class UIManager : MonoBehaviour {
 
     public void AddTaskDescription(string inTaskDescription)
     {
-
-    }
-
-    public void AddTaskNumber(string inTaskNumber)
-    {
-
+        taskText.text = inTaskDescription;
     }
 
     public void AddTaskTime(string inTaskTime)
     {
+        timeText.text = inTaskTime;
+    }
 
+    public void AddButtonText(string inButtonText)
+    {
+        buttonText.text = inButtonText;
     }
 
     public void ReloadGameScene()
