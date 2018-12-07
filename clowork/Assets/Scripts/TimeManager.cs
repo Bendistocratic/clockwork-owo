@@ -17,6 +17,8 @@ public class TimeManager : MonoBehaviour {
     private float currentTime;
     #endregion
 
+    public GameController GameController;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -46,6 +48,7 @@ public class TimeManager : MonoBehaviour {
                         currentHour = 0;
                     }
                 }
+                GameController.Instance.CheckForEventsLeft();
                 fireTimedEvents();
             }
             else
