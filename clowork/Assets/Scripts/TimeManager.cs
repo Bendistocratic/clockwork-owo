@@ -12,8 +12,9 @@ public class TimeManager : MonoBehaviour {
     public float IntervalBetweenEachMinute;
 
     private List<System.Action>[][] timeBucketList; // [hour][minute] - minute in intervals of 5
-    private float currentHour, currentMinute;
-    private bool hasGameStarted, isGamePaused;
+    private int currentHour, currentMinute;
+    private bool hasGameStarted, isPaused;
+    private float currentTime;
     #endregion
 
     private void Awake()
@@ -30,7 +31,28 @@ public class TimeManager : MonoBehaviour {
 
     private void Update()
     {
-        
+        if (hasGameStarted && !isPaused)
+        {
+            if (currentTime > IntervalBetweenEachMinute)
+            {
+                currentTime = 0;
+                currentMinute++;
+                if (currentMinute >= TIME_UNIT)
+                {
+                    currentMinute = 0;
+                    currentHour++;
+                    if (currentHour >= TIME_UNIT)
+                    {
+                        currentHour = 0;
+                    }
+                }
+                fireTimedEvents();
+            }
+            else
+            {
+                currentTime += Time.deltaTime;
+            }
+        }
     }
 
     public void AddTimedEvent(System.Action callback, int hour, int minute)
@@ -46,7 +68,11 @@ public class TimeManager : MonoBehaviour {
 
     private void fireTimedEvents()
     {
-
+        for (int i = 0; i < timeBucketList[currentHour][currentMinute].Count; i++)
+        {
+            timeBucketList[currentHour][currentMinute][i]();
+        }
+        timeBucketList[currentHour][currentMinute] = new List<System.Action>(); // clean list
     }
 
     private void initTimeManager()
@@ -62,5 +88,17 @@ public class TimeManager : MonoBehaviour {
         }
 
         currentHour = currentMinute = 0;
+        currentTime = 0f;
+        hasGameStarted = isPaused = false;
+    }
+
+    public void GameStart()
+    {
+        hasGameStarted = true;
+    }
+
+    public void PauseGame(bool isPaused)
+    {
+        this.isPaused = isPaused;
     }
 }
