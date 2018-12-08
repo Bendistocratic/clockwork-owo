@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour {
     public GameObject TaskPrefab;
     public GameObject GameOverScreen;
     public GameObject GamePauseScreen;
+    public GameObject Hammer;
 
     public Dictionary<System.Guid, GameObject> PrefabList;
     private int numberOfTask;
@@ -45,6 +46,7 @@ public class UIManager : MonoBehaviour {
     {
         if (PrefabList.ContainsKey(id))
         {
+            Hammer.GetComponent<Animator>().Play("Ring");
             GameObject temp = PrefabList[id];
             Destroy(temp);
             PrefabList.Remove(id);
