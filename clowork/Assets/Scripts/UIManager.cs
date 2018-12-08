@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour {
     public GameObject GamePauseScreen;
     public GameObject Hammer;
 
+    #region SCORE
+    public TextMeshProUGUI scoreText, highScoreText;
+    #endregion
+
     public Dictionary<System.Guid, GameObject> PrefabList;
     private int numberOfTask;
 
@@ -66,9 +70,11 @@ public class UIManager : MonoBehaviour {
         Application.Quit();
     }
 
-    public void GameOver()
+    public void GameOver(int score)
     {
         GameOverScreen.SetActive(true);
+        highScoreText.text = GameManager.Instance.GetHighScore(score).ToString();
+        scoreText.text = score.ToString();
     }
 
     public void GamePaused(bool p)

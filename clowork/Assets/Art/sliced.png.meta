@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1462dff87883e8c469ae49868ea11cb7
+guid: 24ff7fb40db912e45865344c399bf302
 TextureImporter:
   fileIDToRecycleName:
     21300000: notification_0
@@ -43,7 +43,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -94,7 +94,7 @@ TextureImporter:
         height: 470
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 350, y: 100, z: 350, w: 100}
       outline: []
       physicsShape: []
       tessellationDetail: 0

@@ -145,4 +145,9 @@ public class TaskController : MonoBehaviour {
     {
         hasGameStarted = false;
     }
+
+    public int GetScore()
+    {
+        return numberOfTasksCleared;
+    }
 }

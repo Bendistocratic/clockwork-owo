@@ -78,9 +78,9 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) { isPaused = !isPaused;    UIManager.Instance.GamePaused(isPaused);
-                                                                        TimeManager.Instance.PauseGame(isPaused);
-                                                                        TaskController.Instance.SetPaused(isPaused); }
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape)) { isPaused = !isPaused;    UIManager.Instance.GamePaused(isPaused);
+                                                                                                            TimeManager.Instance.PauseGame(isPaused);
+                                                                                                            TaskController.Instance.SetPaused(isPaused); }
 
         if (isPaused)
             return;
@@ -174,7 +174,7 @@ public class GameController : MonoBehaviour {
         wrongSound.Play();
         if (currentLives < 1)
         {
-            UIManager.Instance.GameOver();
+            UIManager.Instance.GameOver(TaskController.Instance.GetScore());
             TaskController.Instance.StopGame();
             TimeManager.Instance.StopGame();
             isPaused = true;
