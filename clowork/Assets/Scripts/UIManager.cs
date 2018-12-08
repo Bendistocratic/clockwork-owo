@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour {
     {
         if (PrefabList.ContainsKey(id))
         {
-            Hammer.GetComponent<Animator>().Play("Ring");
+            Hammer.GetComponent<Animator>().Play("Hammer");
             GameObject temp = PrefabList[id];
             Destroy(temp);
             PrefabList.Remove(id);

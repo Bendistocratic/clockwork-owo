@@ -45,15 +45,15 @@ public class TaskController : MonoBehaviour {
             _instance = this;
 
         keyCodeList = new List<KeyCode>(8);
-        keyCodeList.Add(KeyCode.A);
-        keyCodeList.Add(KeyCode.S);
-        keyCodeList.Add(KeyCode.D);
         keyCodeList.Add(KeyCode.F);
         keyCodeList.Add(KeyCode.J);
+        keyCodeList.Add(KeyCode.D);
         keyCodeList.Add(KeyCode.K);
+        keyCodeList.Add(KeyCode.S);
         keyCodeList.Add(KeyCode.L);
+        keyCodeList.Add(KeyCode.A);
         keyCodeList.Add(KeyCode.Semicolon);
-        keyCodeList.Shuffle();
+        //keyCodeList.Shuffle();
     }
 
     private void Start()

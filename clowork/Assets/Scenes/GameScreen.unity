@@ -1011,13 +1011,13 @@ MonoBehaviour:
   Levels:
   - NumberOfButtons: 2
     NewTaskCountdown: 10
-    NumberOfTaskClearedToNext: 3
-    IntervalBetweenEachMinute: 3
-  - NumberOfButtons: 3
+    NumberOfTaskClearedToNext: 2
+    IntervalBetweenEachMinute: 2.8
+  - NumberOfButtons: 2
     NewTaskCountdown: 9
-    NumberOfTaskClearedToNext: 3
+    NumberOfTaskClearedToNext: 2
     IntervalBetweenEachMinute: 2.6
-  - NumberOfButtons: 3
+  - NumberOfButtons: 4
     NewTaskCountdown: 9
     NumberOfTaskClearedToNext: 3
     IntervalBetweenEachMinute: 2.2
@@ -1025,7 +1025,7 @@ MonoBehaviour:
     NewTaskCountdown: 8
     NumberOfTaskClearedToNext: 4
     IntervalBetweenEachMinute: 1.8
-  - NumberOfButtons: 5
+  - NumberOfButtons: 6
     NewTaskCountdown: 6
     NumberOfTaskClearedToNext: 4
     IntervalBetweenEachMinute: 1.6
@@ -1033,7 +1033,7 @@ MonoBehaviour:
     NewTaskCountdown: 6
     NumberOfTaskClearedToNext: 4
     IntervalBetweenEachMinute: 1.4
-  - NumberOfButtons: 7
+  - NumberOfButtons: 8
     NewTaskCountdown: 5
     NumberOfTaskClearedToNext: 5
     IntervalBetweenEachMinute: 1
