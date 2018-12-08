@@ -32,7 +32,7 @@ public class TaskController : MonoBehaviour {
     private const int TIME_UNIT = 12;
 
     private int currentLevel, numberOfTasksCleared;
-    private bool hasGameStarted;
+    private bool hasGameStarted, isPaused;
     private float currentTime;
     private List<KeyCode> keyCodeList;
     private TimeManager tm;
@@ -66,7 +66,7 @@ public class TaskController : MonoBehaviour {
 
     private void Update()
     {
-        if (hasGameStarted)
+        if (hasGameStarted && !isPaused)
         {
             if (currentTime < 0)
             {
@@ -110,8 +110,8 @@ public class TaskController : MonoBehaviour {
     private Task generateTask(int numberOfButtons)
     {
         Task task;
-        task.Hour = Random.Range(tm.GetCurrentHour(), tm.GetCurrentHour() + 3);
-        task.Minute = Random.Range(tm.GetCurrentMinute() + 3, tm.GetCurrentMinute() + 5);
+        task.Hour = Random.Range(tm.GetCurrentHour(), tm.GetCurrentHour() + 2);
+        task.Minute = Random.Range(tm.GetCurrentMinute() + 2, tm.GetCurrentMinute() + 5);
         if (task.Minute >= TIME_UNIT)
         {
             task.Minute %= TIME_UNIT;
@@ -134,6 +134,11 @@ public class TaskController : MonoBehaviour {
     private KeyCode getRandomKeyCode(int numberOfButtons)
     {
         return keyCodeList[Random.Range(0, numberOfButtons)];
+    }
+
+    public void SetPaused(bool p)
+    {
+        isPaused = p;
     }
 
     public void StopGame()

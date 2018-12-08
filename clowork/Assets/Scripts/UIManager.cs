@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour {
     public GameObject List;
     public GameObject TaskPrefab;
     public GameObject GameOverScreen;
+    public GameObject GamePauseScreen;
 
     public Dictionary<System.Guid, GameObject> PrefabList;
     private int numberOfTask;
@@ -66,6 +67,11 @@ public class UIManager : MonoBehaviour {
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
+    }
+
+    public void GamePaused(bool p)
+    {
+        GamePauseScreen.SetActive(p);
     }
 
     public void PlayHoverSound(Button inButton)

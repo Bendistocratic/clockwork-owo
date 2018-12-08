@@ -78,6 +78,10 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) { isPaused = !isPaused;    UIManager.Instance.GamePaused(isPaused);
+                                                                        TimeManager.Instance.PauseGame(isPaused);
+                                                                        TaskController.Instance.SetPaused(isPaused); }
+
         if (isPaused)
             return;
 
@@ -105,7 +109,7 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Semicolon)) { onKeyPressed(KeyCode.Semicolon); ImgSemi.color = buttonPressed; }
         if (Input.GetKeyUp(KeyCode.Semicolon)) { ImgSemi.color = buttonNoPressed; }
 
-        if (Input.GetKeyDown(KeyCode.Space)) { isPaused = !isPaused; }
+        
     }
 
     private void onKeyPressed(KeyCode code)
